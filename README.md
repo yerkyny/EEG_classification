@@ -44,7 +44,7 @@ In this study, our goal is to use EEG signals to classify patients' states and c
 
 $D = {(x_1,y_1), (x_2,y_2), … , (x_n,y_n)}$
 
-Where $x_1, x_2, ..., x_n$ are observations and $y_1, y_2, ..., y_n$ are their corresponding class labels. The objective of this study is to find an accurate mapping between the feature space X and the class label space Y, i.e., $f: X \rightarrow Y$. The class space has a finite number of elements, i.e., $y \in {1, 2,..., K}$, where K=2 
+Where $x_1, x_2, ..., x_n$ are observations and $y_1, y_2, ..., y_n$ are their corresponding class labels. The objective of this study is to find an accurate mapping between the feature space X and the class label space Y, i.e., $f: X \rightarrow Y$. The class space has a finite number of elements, i.e., $y \in {0, 1, 2,..., K}$, where K=1
 
 ##  <a name="data"></a> Dataset
 The dataset used for the study consisted of EEG time series data from the University of Bonn, which had been restructured to contain 5 different target classes, 179 attributes, and 11500 samples. The original dataset contained 5 categories, each with 100 files representing a single subject. Each file recorded brain activity over 23.6 seconds, with the time series divided into 4097 data points representing EEG recordings at different times. Overall, there were 500 individuals in the dataset, each with 4097 data points over 23.5 seconds. The dataset was then divided and shuffled into 23 parts, each containing 178 data points per second, with the last column representing the label $y \in {1,2,3,4,5}$.
@@ -55,6 +55,8 @@ The response variable, y, was in column 179 and explanatory variables were X1, X
 - 3 - a tumor was present in the brain, but the EEG activity was recorded in the healthy area of the brain
 - 4 - eyes closed, meaning that the patient's eyes were closed during the EEG signal recording
 - 5 - eyes open, meaning that the patient's eyes were open during the EEG brain signal recording
+
+![Signals illustration](images/signals_illustration.png)
 
 ##  <a name="prep"></a> Data preprocessing
 *** ***Implementation of this data preprocessing method can be found in the notebook***
