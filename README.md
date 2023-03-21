@@ -14,8 +14,7 @@ Author: Yerkyn Yesbay
 * [Model training](#model)
   * [SVM](#svm)
   * [Random Forest](#rf)
-  * [LSTM](#lstm)
-  * [GRU](#gru)
+  * [Logistic Regression](#lr)
 * [Dependencies](#dependencies)
 * [Questions ans suggestions](#questions)
 
@@ -190,17 +189,6 @@ class WaveletFeatures:
 ```
 
 
-##  <a name="feature"></a>  Feature Selection
-*** ***Implementation of this feature selection method can be found in the notebook***
-Feature selection is an important step in the analysis of electroencephalogram (EEG) data, which involves identifying the most informative features that can be used to distinguish between different cognitive states or disorders. EEG data typically consists of a large number of time-varying voltage measurements, and identifying the relevant features can be challenging and computationally expensive. One common approach to feature selection is to use statistical methods such as ANOVA to rank the features according to their relevance to the target variable, and select the top **k** features for analysis. Other popular methods for feature selection in EEG data include wavelet decomposition, principal component analysis (PCA), and independent component analysis (ICA). Once the features have been selected, they can be used to train machine learning models such as SVM, random forests, or neural networks to predict cognitive states or diagnose disorders. Feature selection is a crucial step in the analysis of EEG data, as it can significantly improve the accuracy and interpretability of the resulting models, and reduce the dimensionality and complexity of the data.
-
-####  <a name="featureR"></a>  Implementation:
-
-The notebook provided is a Python implementation of feature selection using the ANOVA F-test and SVM classification. ANOVA is a statistical method used to test for significant differences between the means of two or more groups, and is commonly used for feature selection in machine learning. The code defines a `FeatureSelector` class that utilizes scikit-learn's `SelectKBest` method to perform ANOVA-based feature selection. The `SelectKBest` method computes the **F-value** and **p-value** of each feature with respect to the target variable, and selects the top k features with the highest F-values. The `FeatureSelector` class also arranges the selected features in the training and testing sets of EEG data for SVM classification. The code further defines an `SVMClassifier` class that uses scikit-learn's `svm.SVC` method to train and evaluate an SVM classification model on the selected features. The `SVMClassifier` class performs cross-validation on the model to assess its accuracy and precision. 
-
-In summary, the use of ANOVA and SVM Classifier-selected features resulted in an increase in epileptic seizure classification precision from 0.98 to 1.0. However, it is worth noting that utilizing all features with a random forest classifier also yields a precision of 1.0. Therefore, while feature selection can enhance certain models' performance, it is not always necessary.
-
-
 ## <a name="model"></a>  Model training
 *** ***Implementation of this models can be found in the notebook***
 
@@ -209,12 +197,44 @@ Support Vector Machines is a family of models used for classification and regres
 
 We use Grid Search Cross Validation to select the optimal regularization parameters C of SVM and the scale parameter of RBF kernel gamma.
 
-
 ### 2. <a name="rf"></a>  Random Forest
+Random Forest is an ensemble learning algorithm that aggregates multiple decision trees and outputs the mode of the classes (for classification) or the mean value (for regression) predicted by individual trees. Each decision tree is trained on a random subset of the training data and a random subset of the features in the dataset, which helps to reduce overfitting and increase the model's generalization performance.
+For personal convenience we defined the class RandomForestGridSearch, the implementation of which is not important. We use it to tune some of the parameters of a random forest model with the parameter grid defined for the whole class.
+
+### 3. <a name="lr"></a> Logistic Regression
+Logistic Regression is a generalized linear model used for classification tasks. It is a simple and popular baseline model in machine learning, which provides similar results to that of SVM with linear kernel but is often easier to fit and allows different regularization penalties such as l1.
+The scikit-learn implementation of Logistic Regression allows one to select the inverse regularization parameter C and the l1/(l1+l2) weight ratio.
+
+## <a name="performance0"></a> Models' performance without wavelets
+
+We began with classification in the original feature space, that is without wavelet-based preprocessing. Original signals are inappropriate for linear classification, so we work with nonlinear models, specifically kernel SVM and Random Forest.
+
+SVM with Gaussian RBF kernel showed quite a good result with 97.4% total accuracy and 96.3% precision for class 1 on the test set. A detailed report is below.
+![Kernel SVM report 0](images/kernel_svm_report0.png)
+With a more thorough search for parameters one can perhaps obtain a slightly better result.
+
+Random Forest has shown a worse results, that is 96.7% total accuracy and 96.3% precision for class 1.
+![Random forest report 0](images/rf_report_0.png)
 
 
+## <a name="performance0"></a> Models' performance after wavelets
 
+After we extracted the wavelet and Hurst features, it turns out that in the new feature space even linear classifiers work remarkably well.
 
+#### Linear classification in the new feature space
+A logistic regression model without any parameter tuning showed 97.5% total accuracy and 97.7% precision for class 1.
+![Logistic Regression report](images/lr_report_0.png)
+
+Linear SVM after after tuning of C has showed 97.8% total accuracy and 97.9% precision for class 1.
+![Linear SVM report](images/linear_svm_report.png)
+
+#### Nonlinear classification in the new feature space
+We also fitted kernel SVM and Random Forest on the new features, obtaining even better results.
+Random Forest predicted test data with 98% total accuracy and 97.7% precision for class 1, which is not much better than linear SVM.
+![Random report 1](images/rf_report_1.png)
+
+SVM with RBF kernel showed 98.3% total accuracy and 98% precision for class 1.
+![Kernel SVM report 1](images/kernel_svm_report1.png)
 
 
 ## <a name="dependencies"></a> Dependencies
