@@ -210,10 +210,13 @@ The scikit-learn implementation of Logistic Regression allows one to select the 
 We began with classification in the original feature space, that is without wavelet-based preprocessing. Original signals are inappropriate for linear classification, so we work with nonlinear models, specifically kernel SVM and Random Forest.
 
 SVM with Gaussian RBF kernel showed quite a good result with 97.4% total accuracy and 96.3% precision for class 1 on the test set. A detailed report is below.
+
 ![Kernel SVM report 0](images/kernel_svm_report0.png)
+
 With a more thorough search for parameters one can perhaps obtain a slightly better result.
 
 Random Forest has shown a worse results, that is 96.7% total accuracy and 96.3% precision for class 1.
+
 ![Random forest report 0](images/rf_report_0.png)
 
 
@@ -223,17 +226,21 @@ After we extracted the wavelet and Hurst features, it turns out that in the new 
 
 #### Linear classification in the new feature space
 A logistic regression model without any parameter tuning showed 97.5% total accuracy and 97.7% precision for class 1.
+
 ![Logistic Regression report](images/lr_report_0.png)
 
 Linear SVM after after tuning of C has showed 97.8% total accuracy and 97.9% precision for class 1.
+
 ![Linear SVM report](images/linear_svm_report.png)
 
 #### Nonlinear classification in the new feature space
 We also fitted kernel SVM and Random Forest on the new features, obtaining even better results.
 Random Forest predicted test data with 98% total accuracy and 97.7% precision for class 1, which is not much better than linear SVM.
+
 ![Random report 1](images/rf_report_1.png)
 
 SVM with RBF kernel showed 98.3% total accuracy and 98% precision for class 1.
+
 ![Kernel SVM report 1](images/kernel_svm_report1.png)
 
 
