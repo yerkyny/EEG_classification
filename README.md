@@ -7,14 +7,15 @@ Author: Yerkyn Yesbay
   * [EEG as a diagnostic tool](#eeg)
 * [Problem](#problem)
 * [Dataset](#data)
-* [Data preprocessing](#prep)
+* [Data preprocessing and feature extraction](#prep)
+  * [Data pre-preprocessing](#clean)
   * [Extracting features from EEG signals using the wavelet transform](#wav)
-  * [Data cleaning, Resampling and Normalization](#clean)
-* [Feature Selection](#feature)
-* [Model training](#model)
+* [Models used](#model)
   * [SVM](#svm)
   * [Random Forest](#rf)
   * [Logistic Regression](#lr)
+* [Model performance without wavelets](#performance0)
+* [Model performance after wavelets](#performance1)
 * [Dependencies](#dependencies)
 * [Questions ans suggestions](#questions)
 
@@ -58,6 +59,9 @@ The response variable, y, was in column 179 and explanatory variables were X1, X
 ![Signals illustration](images/signals_illustration.png)
 
 
+##  <a name="prep"></a> Data preprocessing
+*** ***Implementation of this data preprocessing method can be found in the notebook***
+
 ### <a name="clean"></a>  Data pre-preprocessing
 The initial steps of preprocessing (therefore called pre-preprocessing) include reducing the target variable into binary and balancing the dataset. First the data target variable was transformed into binary by collapsing the classes ${1,2,3,4,5}$ into ${0,1}$, all non-epileptic cases are assigned the label 0.
 
@@ -95,10 +99,6 @@ class DataPreprocessing:
         scaler.fit(data.drop([data.shape[1] - 1], axis=1))
         return pd.DataFrame(scaler.transform(data.drop([data.shape[1] - 1], axis=1)))
 ```
-
-
-##  <a name="prep"></a> Data preprocessing
-*** ***Implementation of this data preprocessing method can be found in the notebook***
 
 ###  <a name="wav"></a> Extracting features from EEG signals using the wavelet transform
 As EEG signals are complex, nonlinear and nonstationary, frequency-time and nonlinear analysis methods are widely used for detecting epilepsy.
@@ -220,7 +220,7 @@ Random Forest has shown a worse results, that is 96.7% total accuracy and 96.3% 
 ![Random forest report 0](images/rf_report_0.png)
 
 
-## <a name="performance0"></a> Models' performance after wavelets
+## <a name="performance1"></a> Models' performance after wavelets
 
 After we extracted the wavelet and Hurst features, it turns out that in the new feature space even linear classifiers work remarkably well.
 
