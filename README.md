@@ -277,7 +277,9 @@ SVM with RBF kernel showed 98.3% total accuracy and 98% precision for class 1.
 
 ```pip install seaborn==0.11.2```
 
+#### catboost
 
+```pip install catboost==1.1.1```
 
 ## <a name="questions"></a> Questions and suggestions
 If you have any questions or suggestions, write to the email: yesbay185@gmail.com
