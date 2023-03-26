@@ -234,7 +234,7 @@ Linear SVM after after tuning of C has showed 97.8% total accuracy and 97.9% pre
 ![Linear SVM report](images/linear_svm_report.png)
 
 #### Nonlinear classification in the new feature space
-We also fitted kernel SVM and Random Forest on the new features, obtaining even better results.
+We also fitted kernel SVM, Random Forest and CatBoost classifier on the new features, obtaining even better results.
 Random Forest predicted test data with 98% total accuracy and 97.7% precision for class 1, which is not much better than linear SVM.
 
 ![Random report 1](images/rf_report_1.png)
@@ -243,6 +243,9 @@ SVM with RBF kernel showed 98.3% total accuracy and 98% precision for class 1.
 
 ![Kernel SVM report 1](images/kernel_svm_report1.png)
 
+CatBoost classifier showed so far the best classification accuracy, that is 98.6 total accuracy and 98.4% without any parameter tuning.
+
+![CatBoost report](images/catboost_report.png)
 
 ## <a name="dependencies"></a> Dependencies
 #### pandas
@@ -277,7 +280,9 @@ SVM with RBF kernel showed 98.3% total accuracy and 98% precision for class 1.
 
 ```pip install seaborn==0.11.2```
 
+#### catboost
 
+```pip install catboost==1.1.1```
 
 ## <a name="questions"></a> Questions and suggestions
 If you have any questions or suggestions, write to the email: yesbay185@gmail.com
