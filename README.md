@@ -14,6 +14,9 @@ Author: Yerkyn Yesbay
   * [SVM](#svm)
   * [Random Forest](#rf)
   * [Logistic Regression](#lr)
+  * [CatBoost](#catboost)
+  * [LSTM](#lstm)
+  * [GRU](#gru)
 * [Model performance without wavelets](#performance0)
 * [Model performance after wavelets](#performance1)
 * [Dependencies](#dependencies)
@@ -189,7 +192,7 @@ class WaveletFeatures:
 ```
 
 
-## <a name="model"></a>  Model training
+## <a name="model"></a>  Models used
 *** ***Implementation of this models can be found in the notebook***
 
 ### 1. <a name="svm"></a>  SVM 
@@ -205,6 +208,11 @@ For personal convenience we defined the class RandomForestGridSearch, the implem
 Logistic Regression is a generalized linear model used for classification tasks. It is a simple and popular baseline model in machine learning, which provides similar results to that of SVM with linear kernel but is often easier to fit and allows different regularization penalties such as l1.
 The scikit-learn implementation of Logistic Regression allows one to select the inverse regularization parameter C and the l1/(l1+l2) weight ratio.
 
+### 4. <a name="catboost"></a> CatBoost
+ CatBoost is a particularly advantageous implementation of gradient boosting on decision trees, a learning algorithm that iterative/additive builds an ensemble of models. Gradient boosting is known to usually outperform other classical (non-deep-learning) machine learning algorithms in accuracy even without hyperparameter tuning, which also makes it computationally attractive compared to e.g. kernel SVM.
+ 
+### 5. <a name="lstm"></a> LSTM network 
+ 
 ## <a name="performance0"></a> Models' performance without wavelets
 
 We began with classification in the original feature space, that is without wavelet-based preprocessing. Original signals are inappropriate for linear classification, so we work with nonlinear models, specifically kernel SVM and Random Forest.
