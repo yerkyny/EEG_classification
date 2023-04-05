@@ -212,7 +212,13 @@ The scikit-learn implementation of Logistic Regression allows one to select the 
  CatBoost is a particularly advantageous implementation of gradient boosting on decision trees, a learning algorithm that iterative/additive builds an ensemble of models. Gradient boosting is known to usually outperform other classical (non-deep-learning) machine learning algorithms in accuracy even without hyperparameter tuning, which also makes it computationally attractive compared to e.g. kernel SVM.
  
 ### 5. <a name="lstm"></a> LSTM network 
- 
+
+Currently being modified and the results are expected to improve.
+
+### 6. <a name="gru"></a> GRU network 
+
+Currently being modified and the results are expected to improve.
+
 ## <a name="performance0"></a> Models' performance without wavelets
 
 We began with classification in the original feature space, that is without wavelet-based preprocessing. Original signals are inappropriate for linear classification, so we work with nonlinear models, specifically kernel SVM and Random Forest.
